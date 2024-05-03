@@ -1,48 +1,22 @@
 <div align="center">
-    <h1>ProjectTemplate</h1>
-    <i>Hi, welcome to my project, hope you will like it !</i>                        <br />
-    <b> > ENJOY < </b>
+    <h1>P-TPI-ETML</h1>
 </div>
 <div align="center">
     <h2>Languages and libraries used for this project</h2>
     <h3> Languages </h3>
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/C.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Cpp.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Csharp.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Java.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Swift.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Html.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Css.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Javascript.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Typescript.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Php.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Blade.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Dart.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Rust.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Go.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Powershell.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Python.png" />
                                                                                      <br />
     <h3> Databases </h3>
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Sql.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Sqlite.png" />
                                                                                      <br />
     <h3> Libraries </h3>
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Lwjgl.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Sfml.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/OpenGl.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Laravel.png" />
     <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/React.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Meteor.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Angular.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Three.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Next.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Vue.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Electron.png" />
+    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Flask.png" />
                                                                                      <br />
     <h3> Engine </h3>
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/Unity.png" />
-    <img height="50" src="https://github.com/dam277/dam277/raw/master/src/images/UnrealEngine.png" />
                                                                                      <br />
 </div>
 <div align="center">
