@@ -1,0 +1,36 @@
+services:
+  client:
+    build: 
+      context: ./client
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/
+          target: /app
+          action: sync
+
+  servers:
+    depends_on:
+      - client
+    build: 
+      context: ./server
+    ports:
+      - "5000:5000"
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./server/
+          target: /app
+          action: sync
+  nginx:
+    build: 
+      context: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - client
+      - servers
