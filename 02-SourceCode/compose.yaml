@@ -1,5 +1,7 @@
 services:
-  client:
+  tpi-stock-client:
+    container_name: tpi-stock-client
+    image: tpi-stock-client
     build: 
       context: ./client
     ports:
@@ -12,25 +14,37 @@ services:
           target: /app
           action: sync
 
-  servers:
-    depends_on:
-      - client
+  tpi-stock-server:
+    container_name: tpi-stock-server
+    image: tpi-stock-server
     build: 
       context: ./server
     ports:
       - "5000:5000"
+    volumes:
+      - ./server/database:/app/database
+    environment:
+      - DB_CONNECTION_STRING=sqlite:////app/database/db.sqlite
     develop:
       watch:
-        - path: ./client/package.json
+        - path: ./server/requirements.txt
           action: rebuild
         - path: ./server/
           target: /app
           action: sync
-  nginx:
+
+  tpi-stock-cypress:
+    container_name: tpi-stock-cypress
+    image: cypress/
     build: 
-      context: ./nginx
+      context: ./ui-testing/
     ports:
-      - 80:80
-    depends_on:
-      - client
-      - servers
+      - "3001:3001"
+    develop:
+      watch:
+        - path: ./ui-testing/
+          target: /e2e
+          action: sync
+
+volumes:
+  database:

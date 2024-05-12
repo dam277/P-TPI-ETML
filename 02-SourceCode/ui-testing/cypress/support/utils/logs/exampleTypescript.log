@@ -1,0 +1,5 @@
+2024-03-08 13:28:53 [DEFAULT] - LOG - Default log
+2024-03-08 13:28:53 [INFO] - LOG - Info log
+2024-03-08 13:28:53 [WARNING] - LOG - Warning log
+2024-03-08 13:28:53 [ERROR] - LOG - Error log
+2024-03-08 13:28:53 [SUCCESS] - LOG - Successfully created log file

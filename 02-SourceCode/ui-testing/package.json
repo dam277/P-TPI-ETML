@@ -1,0 +1,27 @@
+{
+  "name": "caritests",
+  "version": "2.0.0",
+  "description": "Cypress e2e tests for cari and eCari",
+  "main": "index.js",
+  "scripts": 
+  {
+    "open": "cypress open",
+    "run": "cypress run",
+    "run-cloud": "cypress run --record --key 3d7bcb40-4fd2-42a2-9289-6b102f360ee3"
+  },
+  "author": "Damien Loup",
+  "license": "ISC",
+  "dependencies": {
+    "convert-excel-to-json": "^1.7.0",
+    "cypress": "^13.6.6",
+    "cypress-if": "^1.12.0",
+    "cypress-iframe": "^1.0.1",
+    "cypress-plugin-tab": "^1.0.5",
+    "mysql2": "^3.9.1"
+  },
+  "devDependencies": {
+    "@types/convert-excel-to-json": "^1.7.4",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}

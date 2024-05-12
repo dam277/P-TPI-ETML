@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Home test
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Reactsd s
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+function App() 
+{	
+	let api = process.env.REACT_APP_BACKEND_URL || "/"
+	console.log("Api url: ", api)
+	useEffect(() => 
+	{
+		fetch(api, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			}
+		
+		})
+		.then(response => response.json())
+		.then(data => console.log(data))
+	}, [])
+	
+	
+	return (
+		<div className="App">
+			<header className="App-header">
+				<p>
+					Api url: {api}
+				</p>
+			</header>
+		</div>
+		);
+	}
+	
+	export default App;
+	
