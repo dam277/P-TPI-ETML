@@ -50,51 +50,51 @@ def get_frontend():
 
 
 
-@main.route('/hello')
-def hello():
-    user = User(name='1', email="1@ala.sd", password="admin")
-    db.session.add(user)
-    db.session.commit()
-    return user
+# @main.route('/hello')
+# def hello():
+#     user = User(name='1', email="1@ala.sd", password="admin")
+#     db.session.add(user)
+#     db.session.commit()
+#     return user
 
-@main.route('/users')
-def users():
-    users: list[User] = User.query.all()
-    return jsonify({"users": [user.name for user in users]})
+# @main.route('/users')
+# def users():
+#     users: list[User] = User.query.all()
+#     return jsonify({"users": [user.name for user in users]})
 
 
-@main.route('/testsMtM')
-def testsMtM():
-    shop = Shop(name="shop3", city="city3")
-    db.session.add(shop)
+# @main.route('/testsMtM')
+# def testsMtM():
+#     shop = Shop(name="shop3", city="city3")
+#     db.session.add(shop)
 
-    article = Article(description="article4", brand="brand4", collection="collection4", size="size4", color="color4")
-    db.session.add(article)
+#     article = Article(description="article4", brand="brand4", collection="collection4", size="size4", color="color4")
+#     db.session.add(article)
     
-    # shop = Shop.query.filter_by(name="shop2").first()
-    shop.articles.append(article)
+#     # shop = Shop.query.filter_by(name="shop2").first()
+#     shop.articles.append(article)
 
-    db.session.commit()
-    return "OK"
+#     db.session.commit()
+#     return "OK"
 
-@main.route('/testsMtM2')
-def testsMtM2():
-    # article_got = Article.query.filter_by(description="article2").first()
-    # articles_in_shop = article_got.shop
-
-
-    # shop_got = Shop.query.filter_by(name="shop2").first()
-    # articles_in_shop = shop_got.article
-    # return jsonify({"shop_got": shop_got.name, "articles_in_shop": [article.id for article in articles_in_shop]})
-
-    shop_article_got = db.session.query(shop_article).filter(shop_article.columns.fk_shop == 2).all()
-    print(shop_article_got)
-
-    one = shop_article_got[0] if len(shop_article_got) > 0 else None
-    two = shop_article_got[1] if len(shop_article_got) > 1 else None
-    three = shop_article_got[2] if len(shop_article_got) > 2 else None
-
-    return f"result 1 = {one}, result 2 = {two}, result 3 = {three}"
+# @main.route('/testsMtM2')
+# def testsMtM2():
+#     # article_got = Article.query.filter_by(description="article2").first()
+#     # articles_in_shop = article_got.shop
 
 
-    return jsonify()
+#     # shop_got = Shop.query.filter_by(name="shop2").first()
+#     # articles_in_shop = shop_got.article
+#     # return jsonify({"shop_got": shop_got.name, "articles_in_shop": [article.id for article in articles_in_shop]})
+
+#     shop_article_got = db.session.query(shop_article).filter(shop_article.columns.fk_shop == 1).all()
+#     print(shop_article_got)
+
+#     one = shop_article_got[0] if len(shop_article_got) > 0 else None
+#     two = shop_article_got[1] if len(shop_article_got) > 1 else None
+#     three = shop_article_got[2] if len(shop_article_got) > 2 else None
+
+#     return f"result 1 = {one}, result 2 = {two}, result 3 = {three}"
+
+
+#     return jsonify()

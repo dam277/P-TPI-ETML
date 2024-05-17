@@ -41,3 +41,16 @@ class Shop(db.Model):
             str: The string representation of the shop
         """
         return f"Shop {self.name} in {self.city}"
+    
+    def to_dict(self) -> dict:
+        """
+        Get the dictionary representation of the shop
+        
+        Returns:
+            dict: The dictionary representation of the shop
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "city": self.city
+        }

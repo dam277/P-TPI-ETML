@@ -32,10 +32,14 @@ def create_app():
     # Save the blueprints
     from .routes.main import main as main_blueprint
     from .routes.auth import auth as auth_blueprint
+    from .routes.shop import shop as shops_blueprint
+    from .routes.user import user as users_blueprint
 
     # Register the blueprints
     app.register_blueprint(main_blueprint)
     app.register_blueprint(auth_blueprint)
+    app.register_blueprint(shops_blueprint)
+    app.register_blueprint(users_blueprint)
     
     # Set the CORS policy if FRONTEND_URL is set
     if FRONTEND_URL:

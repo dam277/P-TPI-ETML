@@ -34,3 +34,27 @@ class Order(db.Model):
         self.fk_article = article_id
         self.fk_shop = shop_id
         self.units = units
+
+    def __repr__(self) -> str:
+        """
+        Get the string representation of the order
+        
+        Returns:
+            str: The string representation of the order
+        """
+        return f"Order {self.id} of {self.units} units"
+    
+    def to_dict(self) -> dict:
+        """
+        Get the dictionary representation of the order
+        
+        Returns:
+            dict: The dictionary representation of the order
+        """
+        return {
+            "id": self.id,
+            "units": self.units,
+            "user_id": self.fk_user,
+            "article_id": self.fk_article,
+            "shop_id": self.fk_shop
+        }

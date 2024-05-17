@@ -1,8 +1,5 @@
-from flask import Flask
 from src import create_app, db
 from src.database.models import *
-
-app: Flask = None
 
 if __name__ == '__main__':
     # Create the application and the database

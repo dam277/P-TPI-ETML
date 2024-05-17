@@ -77,3 +77,16 @@ class User(UserMixin, db.Model):
         """
         return User.query.get(int(user_id))
 
+    def to_dict(self):
+        """
+        Get the dictionary representation of the user
+        
+        Returns:
+            dict: The dictionary representation of the user
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "isBoss": self.isBoss
+        }

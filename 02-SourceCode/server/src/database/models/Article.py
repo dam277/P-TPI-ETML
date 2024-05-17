@@ -49,3 +49,19 @@ class Article(db.Model):
             str: The string representation of the article
         """
         return f"Article {self.description} of {self.brand} in {self.collection} size {self.size} color {self.color}"
+    
+    def to_dict(self) -> dict:
+        """
+        Get the dictionary representation of the article
+        
+        Returns:
+            dict: The dictionary representation of the article
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "brand": self.brand,
+            "collection": self.collection,
+            "size": self.size,
+            "color": self.color
+        }
