@@ -7,7 +7,7 @@ const cariModules = process.env.npm_config_cariModule ? process.env.npm_config_c
 // Export the configuration
 module.exports = defineConfig
 ({                              
-    projectId : "",
+    projectId: "xnvtaw",
     watchForFileChanges: false,
     defaultCommandTimeout: 30000,
     viewportHeight: 1080,

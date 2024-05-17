@@ -1,6 +1,18 @@
 import * as enums from "../enums";
 
 /**
+ * Travel to the main page of cari
+ * 
+ * @function cy.mainPage
+ * @example
+ * // Go to the main page
+ * cy.mainPage();
+ * 
+ * @returns {Chainable<Subject>}
+ */
+Cypress.Commands.add("mainPage", () => cy.get('.app-logo').click())
+
+/**
  * Logs a message to the Cypress log
  * @param {function} originalFn Original log function
  * @param {string} title Title of the log
@@ -35,6 +47,35 @@ Cypress.Commands.overwrite("log", (originalFn: Function, message: string, logtyp
  * @returns {Chainable<Subject>}
  */
 Cypress.Commands.add("logout", () => cy.get(".logout").click());
+
+/**
+ * Login to cari
+ * 
+ * @function cy.login
+ * @param {string} username Username to login
+ * @param {string} password Password to login
+ * @example
+ *  // Login to cari
+ *  cy.login("username", "password");
+ */
+Cypress.Commands.add("login", (username: string, password: string) => 
+{   
+    cy.url().should("include", "/login");
+
+    // Login to cari
+    cy.get('form').within(() => 
+    {
+        // Type into the fields
+        // Fill the username field
+        cy.get('input[formcontrolname="username"]').type(username)
+
+        // Fill the password field
+        cy.get('input[formcontrolname="password"]').type(password)
+
+        // Submit the form
+        cy.root().submit();
+    });
+});
 
 /**
  * Get the field from the for attribute of a label
@@ -80,61 +121,4 @@ Cypress.Commands.overwrite("select", (originalFn: Function, $subject: HTMLElemen
     cy.wrap($subject).click().as("actualElement");
     cy.get("div[role='listbox']").contains(value.toString()).click();
     cy.get("@actualElement");
-});
-
-/**
- * Get the toggle button from a parent text
- * 
- * @function cy.toggleSwitch
- * @param {string} name Name of the label
- * @param {Partial<{ toggle: TOGGLE, className: string }>} options Options to pass to the function
- * @example
- *  // Get the toggle button from a parent text
- *  cy.toggleSwitch("name"); // Toggle ON or OFF the switch
- * 
- *  // Get the toggle button from a parent text from a context
- *  cy.get("context").toggleSwitch("name"); // Toggle ON or OFF the switch
- * 
- *  // Get the toggle button from a parent text with options
- *  cy.toggleSwitch("name", { toggle: TOGGLE.ON, className: "className" }); // Toggle ON the switch if possible
- * 
- * @returns {Chainable<Subject>}
- */
-Cypress.Commands.add("toggleSwitch", { prevSubject: "optional" }, ($subject, name, options: Partial<{ toggle: enums.TOGGLE, className: string }> = {}) => 
-{   
-    // Get the options
-    const { toggle, className = "mdc-switch--checked" } = options;
-
-    // Get the button and check if the toggle is checked
-    cy.wrap($subject).contains(name).children("mat-slide-toggle").children().children("button").then(($button) =>
-    {
-        // Get the classlist and check if one of these has the checked word
-        const classes = $button[0].classList;
-        
-        // Check if the toggle button is checked
-        let isAlreadyChecked = false;
-        for (let classProperty of Array.from(classes)) 
-        {
-            // Check if the classProperty is checked one
-            if (classProperty !== className) continue;
-            isAlreadyChecked = true;
-            break;
-        }
-
-        // Check if the toggle in to on or off
-        switch(toggle)
-        {
-            case enums.TOGGLE.ON: 
-                if (!isAlreadyChecked) 
-                    cy.wrap($button).click();
-                break;
-            case enums.TOGGLE.OFF:
-                if (isAlreadyChecked) 
-                    cy.wrap($button).click();
-                break;
-            default:
-                cy.wrap($button).click();
-                break;
-        }
-    });
 });

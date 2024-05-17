@@ -6,7 +6,6 @@ describe('test 1', () =>
 { 
     it('tests', () => 
     {
-        cy.log("Hello World")
         // // Database simple exec
         // cy.task("queryDb", {query: "SELECT * FROM world.city"}).then((data) => {
         //     console.log(data);
