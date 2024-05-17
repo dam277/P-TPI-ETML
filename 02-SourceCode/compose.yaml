@@ -22,9 +22,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./server/database:/app/database
-    environment:
-      - DB_CONNECTION_STRING=sqlite:////app/database/db.sqlite
+      - ./server/src/database/db.sqlite:/tpi-database
     develop:
       watch:
         - path: ./server/requirements.txt
@@ -35,16 +33,9 @@ services:
 
   tpi-stock-cypress:
     container_name: tpi-stock-cypress
-    image: cypress/
+    image: cypress/included:13.9.0
     build: 
-      context: ./ui-testing/
-    ports:
-      - "3001:3001"
-    develop:
-      watch:
-        - path: ./ui-testing/
-          target: /e2e
-          action: sync
+      context: ./ui-testing
 
 volumes:
-  database:
+  tpi-database:
