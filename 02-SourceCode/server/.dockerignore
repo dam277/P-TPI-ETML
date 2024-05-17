@@ -31,5 +31,6 @@
 **/build
 **/dist
 **/package-lock.json
+**/frontend
 LICENSE
 README.md

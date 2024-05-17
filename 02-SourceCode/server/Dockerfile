@@ -2,10 +2,12 @@ FROM python:3.12.3
 
 WORKDIR /app
 
-COPY . .
-RUN pip3 install -r requirements.txt
+RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
 
-ENV FRONTEND_ULR=http://localhost:3000
+COPY . .
+RUN pip install -r requirements.txt
+
+ENV FRONTEND_URL=http://localhost:3000
 
 EXPOSE 5000
-CMD [ "python3", "app.py"]
+CMD ["python", "run.py"]
