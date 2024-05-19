@@ -22,7 +22,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./server/src/database/db.sqlite:/tpi-database
+      - ./server/src/database/:/tpi-database
     develop:
       watch:
         - path: ./server/requirements.txt
