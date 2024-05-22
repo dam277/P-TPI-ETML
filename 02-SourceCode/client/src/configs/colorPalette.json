@@ -1,0 +1,23 @@
+{
+    "colorpalette":
+        {
+        "button": "#FF006B",
+        "backgrounds": 
+        {
+            "primary": "#222222",
+            "secondary": "#333333",
+            "footer": "#000000"
+        },
+        "texts": 
+        {
+            "default": "#FFFFFF",
+            "login": "#FF006B"
+        },
+        "status":
+        {
+            "ok": "green",
+            "pending": "blue",
+            "notOk": "red"
+        }
+    }
+}
