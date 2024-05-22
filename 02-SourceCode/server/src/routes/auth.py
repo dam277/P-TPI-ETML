@@ -15,7 +15,6 @@ def login():
     # Get the email and password from the request
     email: str = request.json.get('email')
     password: str = request.json.get('password')
-
     # Get the user
     user: User = User.query.filter_by(email=email).first()
 
@@ -25,7 +24,7 @@ def login():
     
     # Log the user in
     login_user(user)
-    return {'message': 'Logged in'}, 200
+    return {'message': 'Logged in', 'user': user.to_dict()}, 200
 
 @auth.route('/logout')
 @login_required

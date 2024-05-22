@@ -88,5 +88,5 @@ class User(UserMixin, db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "isBoss": self.isBoss
+            "isBoss": self.isBoss == 1
         }

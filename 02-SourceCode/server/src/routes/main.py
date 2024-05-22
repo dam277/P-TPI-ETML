@@ -50,17 +50,17 @@ def get_frontend():
 
 
 
-# @main.route('/hello')
-# def hello():
-#     user = User(name='1', email="1@ala.sd", password="admin")
-#     db.session.add(user)
-#     db.session.commit()
-#     return user
+@main.route('/hello')
+def hello():
+    user = User(name='test', email="test@gmail.com", password="test")
+    db.session.add(user)
+    db.session.commit()
+    return user
 
-# @main.route('/users')
-# def users():
-#     users: list[User] = User.query.all()
-#     return jsonify({"users": [user.name for user in users]})
+@main.route('/users')
+def users():
+    users: list[User] = User.query.all()
+    return jsonify({"users": [user.name for user in users]})
 
 
 # @main.route('/testsMtM')
