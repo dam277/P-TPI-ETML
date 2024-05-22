@@ -1,8 +1,15 @@
+const colorPalette = require('./src/configs/colorPalette.json');
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+module.exports = 
+{
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
+  theme: 
+  {
+    extend: 
+    {
+      colors: colorPalette
+    },
   },
   plugins: [],
 }
