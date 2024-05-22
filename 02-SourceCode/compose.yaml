@@ -10,6 +10,8 @@ services:
       watch:
         - path: ./client/package.json
           action: rebuild
+        - path: ./client/tailwind.css
+          action: rebuild
         - path: ./client/
           target: /app
           action: sync

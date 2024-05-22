@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY . .
 RUN npm install
+RUN npm run css:build
 
 ENV REACT_APP_BACKEND_URL=http://localhost:5000
 
