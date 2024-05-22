@@ -4,6 +4,8 @@ import Home from './pages/views/Home';
 import Dashboard from './pages/views/Dashboard';
 import Orders from './pages/views/Orders';
 
+import UserContext from './utils/contexts/UserContext';
+
 import Main from './pages/includes/Main';
 import Footer from './pages/includes/Footer';
 
@@ -11,14 +13,16 @@ function Router()
 {
     return (
         <BrowserRouter>
-            <Main>
-                <Routes>
-                    <Route path="/" element={<Login />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/orders" element={<Orders />} />
-                </Routes>
-            </Main>
+            <UserContext>
+                <Main>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/orders" element={<Orders />} />
+                    </Routes>
+                </Main>
+            </UserContext>
             <Footer />
         </BrowserRouter>
     );

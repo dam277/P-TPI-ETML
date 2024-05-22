@@ -2,6 +2,8 @@
 import { useState, createContext } from "react"
 import User from "../interfaces/User";
 
+import Configs from "../../configs/Configs";
+
 // Create Context
 export const UserContext = createContext({});
 
@@ -13,7 +15,7 @@ export const UserContext = createContext({});
 const UserProvider = ({ children }: {children: any}) => 
 {
     // Set States
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User>(localStorage.getItem("user") as unknown as User);
 
     // Return html elements
     return (

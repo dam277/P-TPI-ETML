@@ -1,30 +1,50 @@
 import { useState, useEffect } from "react";
 import Configs from "../../configs/Configs";
 
-export const useFetch = (url: string): [ {}|null, Boolean, {}|null ] => 
+export const useFetch = (): [ makeApiCall: (url: string, method: string, body: {} | []) => Promise<any>|undefined, data: {}|null, loading: Boolean, error: string|undefined] => 
 {
-    const API_URL = Configs.API_URL + url;                        // API URL
-
     const [data, setData] = useState<{}|null>(null);                  // Data fetched from the URL
-    const [loading, setLoading] = useState<boolean>(true);        // Loading state
-    const [error, setError] = useState<{}|null>(null);                // Error state
+    const [loading, setLoading] = useState<boolean>(false);            // Loading state
+    const [error, setError] = useState<string>();                     // Error state
 
-    useEffect(() =>
+    const makeApiCall = (url: string, method: string, body: {}|[]) =>
     {
         // If no URL is provided, return
         if (!url) return;
+
+        // Set the API URL
+        const API_URL = Configs.API_URL + url;        
         
         // Fetch the data from the URL sent
-        fetch(API_URL)
-        .then((res) => res.json())
+        return fetch(API_URL, 
+        {
+            method: method,
+            headers: 
+            {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        })
+        .then((res) => 
+        {
+            setLoading(true);
+            setError("");
+            if(!res.status.toString().startsWith("2"))
+            {
+                res.json().then((data) => setError(data.message));
+                return;
+            }
+            return res.json();
+        })
         .then((data) => 
         {
             setData(data);
+            return data;
         })
-        .catch((err) => alert(err))
         .finally(() => setLoading(false));
-    }, [url, API_URL]);
+    }
+    
     
     // Return the data, loading state and error
-    return [ data, loading, error ];
+    return [ makeApiCall, data, loading, error ];
 }
