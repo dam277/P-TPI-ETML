@@ -1,0 +1,41 @@
+services:
+  tpi-stock-client:
+    container_name: tpi-stock-client
+    image: tpi-stock-client
+    build: 
+      context: ./client
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/
+          target: /app
+          action: sync
+
+  tpi-stock-server:
+    container_name: tpi-stock-server
+    image: tpi-stock-server
+    build: 
+      context: ./server
+    ports:
+      - "5000:5000"
+    # volumes:
+    #   - ./server/src/database/:/tpi-database
+    develop:
+      watch:
+        - path: ./server/requirements.txt
+          action: rebuild
+        - path: ./server/
+          target: /app
+          action: sync
+
+  tpi-stock-cypress:
+    container_name: tpi-stock-cypress
+    image: cypress/included:13.9.0
+    build: 
+      context: ./ui-testing
+
+# volumes:
+#   tpi-database:

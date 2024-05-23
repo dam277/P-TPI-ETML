@@ -1,0 +1,30 @@
+services:
+  tpi-stock-app:
+    image: tpi-stock-app
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    develop:
+      watch:
+        - path: ./app/client/
+          action: rebuild
+        - path: ./app/server/requirements.txt
+          action: rebuild
+        - path: ./app/
+          target: /app
+          action: sync
+    
+  tpi-stock-cypress:
+    image: tpi-stock-cypress
+    build:
+      context: ./tests/ui/
+      dockerfile: Dockerfile
+    develop:
+      watch:
+        - path: ./tests/ui/package.json
+          action: rebuild
+        - path: ./tests/
+          target: /ui
+          action: sync
