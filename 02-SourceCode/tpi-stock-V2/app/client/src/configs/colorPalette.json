@@ -1,11 +1,17 @@
 {
     "colorpalette":
+    {
+        "button": 
         {
-        "button": "#FF006B",
+            "color": "#FF006B",
+            "disconnect": "red"
+        },
+        "active": "#FF006B",
         "backgrounds": 
         {
             "primary": "#222222",
             "secondary": "#333333",
+            "tertiary": "#4F4E4E",
             "footer": "#000000"
         },
         "texts": 

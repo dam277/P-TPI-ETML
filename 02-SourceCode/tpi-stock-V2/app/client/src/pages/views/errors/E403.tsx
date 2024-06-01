@@ -1,17 +1,17 @@
 /**
- * @file E401.tsx
- * @description Displays the 401 error page
+ * @file E403.tsx
+ * @description Displays the 403 error page
  * @author Damien Loup
  */
 
-// Import libraries
+// Import includes
 import Main from "../../includes/Main";
 
 /**
  * Displays the 401 error page
- * @returns => E401 component
+ * @returns => E403 component
  */
-function E401() 
+function E403() 
 {
     return (
         <Main>
@@ -19,15 +19,15 @@ function E401()
                 <div className="max-w-md w-full space-y-8">
                     <div>
                         <h2 className="mt-6 text-center text-3xl font-extrabold">
-                            401 - Unauthorized
+                            403 - Forbidden
                         </h2>
                         <p className="mt-2 text-center text-sm">
-                            You do not have the necessary permissions to access this page.
+                            You are not allowed to access this page.
                         </p>
                     </div>
                     <div className="mt-6">
-                        <a href="/home" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-colorpalette-texts-default bg-colorpalette-button-color hover:bg-opacity-80">
-                            Go back to home
+                        <a href="/" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-colorpalette-texts-default bg-colorpalette-button-color hover:bg-opacity-80">
+                            Go back to login
                         </a>
                     </div>
                 </div>
@@ -36,4 +36,4 @@ function E401()
     );
 }
 
-export default E401;
+export default E403;
