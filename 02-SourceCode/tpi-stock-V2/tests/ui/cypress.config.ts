@@ -9,13 +9,15 @@ module.exports = defineConfig
 ({                              
     projectId: "xnvtaw",
     watchForFileChanges: false,
-    defaultCommandTimeout: 30000,
+    defaultCommandTimeout: 10000,
     viewportHeight: 1080,
     viewportWidth: 1920,
     
     // Setup e2e testing configuration
     e2e: 
     {
+        baseUrl: 'http://host.docker.internal:5000',
+
         // Setup the node events
         setupNodeEvents(on, config) 
         {

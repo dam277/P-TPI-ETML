@@ -1,5 +1,7 @@
 // Import the commands
 import "./commands/general"
+import "./commands/checks"
+import "./commands/errors"
 
 // Import the utils
 import "./utils/Logger" // Initialize the logger

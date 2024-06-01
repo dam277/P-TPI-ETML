@@ -1,18 +1,6 @@
 import * as enums from "../enums";
 
 /**
- * Travel to the main page of cari
- * 
- * @function cy.mainPage
- * @example
- * // Go to the main page
- * cy.mainPage();
- * 
- * @returns {Chainable<Subject>}
- */
-Cypress.Commands.add("mainPage", () => cy.get('.app-logo').click())
-
-/**
  * Logs a message to the Cypress log
  * @param {function} originalFn Original log function
  * @param {string} title Title of the log
@@ -37,88 +25,86 @@ Cypress.Commands.overwrite("log", (originalFn: Function, message: string, logtyp
 });
 
 /**
- * Logout from cari using the logout button
+ * Logout from the website
  * 
  * @function cy.logout
  * @example 
- *  // Logout from cari
+ *  // Logout from the website
  *  cy.logout();
  * 
  * @returns {Chainable<Subject>}
  */
-Cypress.Commands.add("logout", () => cy.get(".logout").click());
+Cypress.Commands.add("logout", () => cy.get("#btnLogout").if().click());
 
 /**
- * Login to cari
+ * Login to the website
  * 
  * @function cy.login
- * @param {string} username Username to login
+ * @param {string} email email to login
  * @param {string} password Password to login
  * @example
- *  // Login to cari
- *  cy.login("username", "password");
+ *  // Login to the website
+ *  cy.login("email", "password");
  */
-Cypress.Commands.add("login", (username: string, password: string) => 
+Cypress.Commands.add("login", (email: string, password: string) => 
 {   
-    cy.url().should("include", "/login");
-
     // Login to cari
     cy.get('form').within(() => 
     {
         // Type into the fields
-        // Fill the username field
-        cy.get('input[formcontrolname="username"]').type(username)
+        // Fill the email field
+        cy.get('#email').clear().type(email)
 
         // Fill the password field
-        cy.get('input[formcontrolname="password"]').type(password)
+        cy.get('#password').clear().type(password)
 
         // Submit the form
         cy.root().submit();
     });
 });
 
-/**
- * Get the field from the for attribute of a label
- * 
- * @function cy.getFieldFromForAttribute
- * @param {string} labelName Name of the label
- * @example
- *  // Get the field from the for attribute of a label
- *  cy.getFieldFromForAttribute("labelName").type("hello world");
- * 
- *  // Get the field from the for attribute of a label from a context
- *  cy.get("context").getFieldFromForAttribute("labelName").type("hello world");
- * 
- * @returns {Chainable<Subject>} The field from the for attribute of a label 
-*/
-Cypress.Commands.add("getFieldFromForAttribute", { prevSubject: "optional" }, ($subject: HTMLElement, labelName: string) => cy.wrap($subject).contains(labelName).invoke("attr", "for").then(value => cy.get(`#${value}`)));
+// /**
+//  * Get the field from the for attribute of a label
+//  * 
+//  * @function cy.getFieldFromForAttribute
+//  * @param {string} labelName Name of the label
+//  * @example
+//  *  // Get the field from the for attribute of a label
+//  *  cy.getFieldFromForAttribute("labelName").type("hello world");
+//  * 
+//  *  // Get the field from the for attribute of a label from a context
+//  *  cy.get("context").getFieldFromForAttribute("labelName").type("hello world");
+//  * 
+//  * @returns {Chainable<Subject>} The field from the for attribute of a label 
+// */
+// Cypress.Commands.add("getFieldFromForAttribute", { prevSubject: "optional" }, ($subject: HTMLElement, labelName: string) => cy.wrap($subject).contains(labelName).invoke("attr", "for").then(value => cy.get(`#${value}`)));
 
-/**
- * Select an option from a selctor
- * 
- * @function cy.select
- * @param {string | number | Array<string | number>} value Value to select
- * @param {Partial<{ custom: boolean }>} options Options to pass to the function
- * @example
- * // Select an option from a selector
- * cy.get("selector").select("value");
- * 
- * // Select an option from a selector with custom options
- * cy.get("selector").select("value", { custom: true });
- * 
- * @returns {Chainable<Subject>}
- */
-Cypress.Commands.overwrite("select", (originalFn: Function, $subject: HTMLElement, value: string | number | (string | number)[], options = {}) =>
-{
-    // Get the options
-    const { custom } = options;
+// /**
+//  * Select an option from a selctor
+//  * 
+//  * @function cy.select
+//  * @param {string | number | Array<string | number>} value Value to select
+//  * @param {Partial<{ custom: boolean }>} options Options to pass to the function
+//  * @example
+//  * // Select an option from a selector
+//  * cy.get("selector").select("value");
+//  * 
+//  * // Select an option from a selector with custom options
+//  * cy.get("selector").select("value", { custom: true });
+//  * 
+//  * @returns {Chainable<Subject>}
+//  */
+// Cypress.Commands.overwrite("select", (originalFn: Function, $subject: HTMLElement, value: string | number | (string | number)[], options = {}) =>
+// {
+//     // Get the options
+//     const { custom } = options;
 
-    // Check if the select is a custom one
-    if (!options || !custom)
-        return originalFn($subject, value, options);
+//     // Check if the select is a custom one
+//     if (!options || !custom)
+//         return originalFn($subject, value, options);
 
-    // Select the element in custom selector
-    cy.wrap($subject).click().as("actualElement");
-    cy.get("div[role='listbox']").contains(value.toString()).click();
-    cy.get("@actualElement");
-});
+//     // Select the element in custom selector
+//     cy.wrap($subject).click().as("actualElement");
+//     cy.get("div[role='listbox']").contains(value.toString()).click();
+//     cy.get("@actualElement");
+// });

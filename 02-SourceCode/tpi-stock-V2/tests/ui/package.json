@@ -1,5 +1,5 @@
 {
-  "name": "caritests",
+  "name": "tpi-stock-cypress-tests",
   "version": "2.0.0",
   "description": "Cypress e2e tests for cari and eCari",
   "main": "index.js",

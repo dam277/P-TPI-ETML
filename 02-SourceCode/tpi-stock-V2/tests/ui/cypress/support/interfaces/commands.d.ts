@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-declare namespace Cypress 
+declare namespace Cypress
 {
     interface Chainable<Subject>
     {
@@ -8,18 +8,6 @@ declare namespace Cypress
         type(text: string|number, options?: Partial<TypeOptions>): Chainable<Subject>;
 
         //------------------------------- General functions -------------------------------
-        /**
-        * Travel to the main page of cari
-        * 
-        * @function cy.mainPage
-        * @example
-        *  // Go to the main page
-        *  cy.mainPage();
-        * 
-        * @returns {Chainable<Subject>}
-        */
-        mainPage(): Chainable<Subject>;
-        
         /**
         * @function cy.log
         * @override
@@ -60,61 +48,94 @@ declare namespace Cypress
         * 
         * @returns {Chainable<Subject>}
         */
-        login(username: string, password: string): Chainable<Subject>;
+        login(username: string, password: string): Chainable<Subject>;      
         
+        //------------------------------- Checks functions -------------------------------
         /**
-        * Get the field from the for attribute of a label
-        * 
-        * @function cy.getFieldFromForAttribute
-        * @param {string} labelName Name of the label
-        * @example
-        *  // Get the field from the for attribute of a label
-        *  cy.getFieldFromForAttribute("labelName").type("hello world");
-        * 
-        *  // Get the field from the for attribute of a label from a context
-        *  cy.get("context").getFieldFromForAttribute("labelName").type("hello world");
-        * 
-        * @returns {Chainable<Subject>} The field from the for attribute of a label 
-        */
-        getFieldFromForAttribute(labelName: string): Chainable<Subject>;
-        
+         * Check if the home page is correctly displayed
+         *  
+         * @function cy.checkHomePage
+         * @example
+         * // Check if the home page is correctly displayed
+         * cy.checkHomePage(user, shop);
+         * 
+         * @param {{}} user User to check
+         * @param {{}} shop Shop to check
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkHomePage(user: {}, shop: {}): Chainable<Subject>;
+
         /**
-        * Select an option from a selctor
-        * 
-        * @function cy.select
-        * @override
-        * @param {string | number | Array<string | number>} value Value to select
-        * @param {Partial<{ custom: boolean }>} options Options to pass to the function
-        * @example
-        *  // Select an option from a selector
-        *  cy.get("selector").select("value");
-        * 
-        *  // Select an option from a selector with custom options
-        *  cy.get("selector").select("value", { custom: true });
-        * 
-        * @returns {Chainable<Subject>}
-        */
-        select(value: string | number | Array<string | number>, options?: Partial<{custom: boolean}>): Chainable<Subject>;        
-        
+         * Check if the dashboard page is correctly displayed
+         *  
+         * @function cy.checkDashboardPage
+         * @example
+         * // Check if the dashboard page is correctly displayed
+         * cy.checkDashboardPage(user, shop);
+         * 
+         * @param {{}} user User to check
+         * @param {{}} shop Shop to check
+         * @param {[]} shops Shops to check
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkDashboardPage(user: {}, shop: {}, shops: any[]): Chainable<Subject>;
+
         /**
-        * Get the toggle button from a parent text
-        * 
-        * @function cy.toggleSwitch
-        * @param {string} name Name of the label
-        * @param {Partial<{ toggle: TOGGLE, className: string }>} options Options to pass to the function
-        * @example
-        *  // Get the toggle button from a parent text
-        *  cy.toggleSwitch("name"); // Toggle ON or OFF the switch
-        * 
-        *  // Get the toggle button from a parent text from a context
-        *  cy.get("context").toggleSwitch("name"); // Toggle ON or OFF the switch
-        * 
-        *  // Get the toggle button from a parent text with options
-        *  import { TOGGLE } from "../support/enums";
-        *  cy.toggleSwitch("name", { toggle: TOGGLE.ON, className: "className" }); // Toggle ON the switch if possible
-        * 
-        * @returns {Chainable<Subject>}
-        */
-        toggleSwitch(name: string, options?: Partial<{ toggle: number, className: string }>): Chainable<Subject>;
+         * Check if the values of the array are correctly displayed
+         *  
+         * @function cy.checkOrderPage
+         * @example
+         * // Check if the values of the array are correctly displayed
+         * cy.checkOrderPage(user, shop);
+         * 
+         * @param {{}} user User to check
+         * @param {[]} shops Shops to check
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkArrayValues(user: {}, shops: any[]): Chainable<Subject>;
+
+        //------------------------------- Error functions -------------------------------
+        /**
+         * Check if the 401 error page is correctly displayed
+         *  
+         * @function cy.checkForError401
+         * @example
+         * // Check if the 401 error page is correctly displayed
+         * cy.checkForError401();
+         * 
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkForError401(): Chainable<Subject>;
+
+        /**
+         * Check if the 403 error page is correctly displayed
+         *  
+         * @function cy.checkForError403
+         * @example
+         * // Check if the 403 error page is correctly displayed
+         * cy.checkForError403();
+         * 
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkForError403(): Chainable<Subject>;
+
+        /**
+         * Check if the 404 error page is correctly displayed
+         *  
+         * @function cy.checkForError404
+         * @example
+         * // Check if the 404 error page is correctly displayed
+         * cy.checkForError404();
+         * 
+         * @param {string} url URL to check
+         * @returns {Chainable<Subject>}
+         * 
+         */
+        checkForError404(url: string): Chainable<Subject>;
     }
 }

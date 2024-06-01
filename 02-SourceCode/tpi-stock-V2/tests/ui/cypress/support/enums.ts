@@ -14,34 +14,35 @@ export enum LOGTYPES
 }
 
 /**
- * @enum {FIELDS} => Fields enumeration
+ * @enum {ARTICLEFIELDS} => Article fields enumeration
  * @public
  * @example
- * cy.search({[FIELDS.SURNAME]: "Doe", [FIELDS.NAME]: "John"});
+ * const field = ARTICLEFIELDS.TITLE
  */
-export enum FIELDS
+export enum ARTICLEFIELDS
 {
-    SURNAME = "nom",
-    NAME = "prenom",
-    BIRTHDATE = "dateNaissance",
-    ID = "idPersonne",
-    PLATE = "plaque",
-    GEAR = "engin",
-    INVOICE = "facture",
-    NPA = "npaLocalite",
-    SOCIAL = "raisonSociale"
+    ARTNO = "Art. No.",
+    DESCRIPTION = "Description",
+    BRAND = "Brand",
+    COLLECTION = "Collection",
+    SIZE = "Size",
+    COLOR = "Color",
+    UNITSINSTOCK = "Units in stock",
+    UNITSSOLD = "Units sold",
+    STATUS = "Status",
 }
 
 /**
- * @enum {LANGUAGES} => Languages enumeration
+ * @enum {ORDERFIELDS} => Order fields enumeration
  * @public
  * @example
- * const language = LANGUAGES.FR
+ * const field = ORDERFIELDS.ORDERNO
  */
-export enum LANGUAGES
+export enum ORDERFIELDS
 {
-    FR = "Français",
-    DE = "Deutsch",
-    IT = "Italiano",
-    RO = "Romaunch" 
+    ORDERNO = "Order No.",
+    ARTNO = "Art. No.",
+    UNITSORDERED = "Units ordered",
+    ORDEREDBY = "Ordered by",
+    STATUS = "Status",
 }

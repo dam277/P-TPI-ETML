@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Louis Turner", 
+        "email": "louis.t@gmail.com", 
+        "password": "Louis1234", 
+        "shop": false, 
+        "boss": true
+    },
+    {
+        "name": "Alice Smith", 
+        "email": "alice.s@gmail.com", 
+        "password": "Alice1234", 
+        "shop": false, 
+        "boss": true
+    },
+    {
+        "name": "François Lambert", 
+        "email": "françois.l@gmail.com", 
+        "password": "F-L1234", 
+        "shop": "Horology Haven", 
+        "boss": false
+    },
+    {
+        "name": "Steve Davis", 
+        "email": "steve.d@gmail.com", 
+        "password": "S-D1234", 
+        "shop": "Horology Haven", 
+        "boss": false
+    },
+    {
+        "name": "Sabrina King", 
+        "email": "sabrina.k@gmail.com", 
+        "password": "S-K1234", 
+        "shop": "O'Clock", 
+        "boss": false
+    }
+]
