@@ -20,11 +20,11 @@ import Configs from "../../configs/Configs";
  */
 export const useFetch = <DataType> (): [ makeApiCall: <T extends DataType>(url: string, method: string, body?: {} | [] | null, contentType?: any , displayError?: boolean) => Promise<T>, data: DataType|null, loading: Boolean, error: string|undefined, setData: Function] => 
 {
-    const [data, setData] = useState<DataType|null>(null);            // Data fetched from the URL
-    const [loading, setLoading] = useState<boolean>(false);           // Loading state
-    const [error, setError] = useState<string>();                     // Error state
+    const [data, setData] = useState<DataType|null>(null);              // Data fetched from the URL
+    const [loading, setLoading] = useState<boolean>(false);             // Loading state
+    const [error, setError] = useState<string>();                       // Error state
 
-    const location = useLocation();
+    const location = useLocation();                                     // Get the current location
 
     /**
      * 

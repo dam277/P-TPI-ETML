@@ -32,7 +32,7 @@ def login():
 
     # Check if user exists and if the password is correct
     if not user or not user.check_password(password):
-        return {'message': 'Invalid credentials'}
+        return {'message': 'Invalid credentials'}, 405
     
     # Log the user in
     login_user(user, remember=True, force=True)
