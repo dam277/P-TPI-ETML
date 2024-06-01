@@ -1,4 +1,11 @@
+# file: run.py
+# Description: Run the application
+# Author: Damien Loup
+
+# Import mains
 from server.src import create_app, db
+
+# Import models
 from server.src.database.models import *
 
 if __name__ == '__main__':
