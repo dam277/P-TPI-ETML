@@ -1,7 +1,15 @@
+# file: ShopArticle.py
+# Description: ShopArticle model
+# Author: Damien Loup
+
+# Import modules
 from sqlalchemy import Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
+# Import main
 from ...utils.globals import hash_id
+
+# Import globals
 from ... import db
 
 class ShopArticle(db.Model):
@@ -14,13 +22,15 @@ class ShopArticle(db.Model):
     # Create a table in the db
     __tablename__ = 'shop_article'
 
-    fk_shop = Column(Integer, ForeignKey('shop.id'), primary_key=True) # ID of the shop
-    fk_article = Column(Integer, ForeignKey('article.id'), primary_key=True) # ID of the article
-    unitsStored = Column(Integer) # Units stored of the article in the shop
-    unitsSolded = Column(Integer) # Units solded of the article in the shop
+    # Columns
+    fk_shop = Column(Integer, ForeignKey('shop.id'), primary_key=True)                  # ID of the shop
+    fk_article = Column(Integer, ForeignKey('article.id'), primary_key=True)            # ID of the article
+    unitsStored = Column(Integer)                                                       # Units stored of the article in the shop
+    unitsSolded = Column(Integer)                                                       # Units solded of the article in the shop
 
-    shop = relationship("Shop", back_populates="shop_articles") # Shop of the shop article
-    article = relationship("Article", back_populates="shop_articles") # Article of the shop article
+    # Relationships
+    shop = relationship("Shop", back_populates="shop_articles")                         # Shop of the shop article
+    article = relationship("Article", back_populates="shop_articles")                   # Article of the shop article
 
     def __init__(self, fk_shop: int, fk_article: int, unitsStored: int, unitsSolded: int):
         """
@@ -51,7 +61,7 @@ class ShopArticle(db.Model):
     
     def to_dict(self) -> dict:
         """
-        Get the dictionary representation of the shop article
+        Get the dictionary representation of the shop article with hashed id
         
         Returns:
             dict: The dictionary representation of the shop article
@@ -63,9 +73,9 @@ class ShopArticle(db.Model):
             "unitsSolded": self.unitsSolded
         }
     
-    def to_dict_debug(self) -> dict:
+    def to_dict_raw(self) -> dict:
         """
-        Get the dictionary representation of the shop article for debugging
+        Get the dictionary representation of the shop article 
         
         Returns:
             dict: The dictionary representation of the shop article

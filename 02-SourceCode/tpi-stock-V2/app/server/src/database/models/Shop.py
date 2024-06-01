@@ -1,7 +1,15 @@
+# file: Shop.py
+# Description: Shop model
+# Author: Damien Loup
+
+# Import modules
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 
+# Import globals
 from ...utils.globals import hash_id
+
+# Import main
 from ... import db
 
 class Shop(db.Model):
@@ -14,13 +22,15 @@ class Shop(db.Model):
     # Create a table in the db
     __tablename__ = 'shop'
 
-    id = Column(Integer, primary_key=True)                  # ID of the shop
-    name = Column(String(255), unique=True, index=True)     # Name of the shop
-    city = Column(String(255))                              # City of the shop
+    # Columns
+    id = Column(Integer, primary_key=True)                                      # ID of the shop
+    name = Column(String(255), unique=True, index=True)                         # Name of the shop
+    city = Column(String(255))                                                  # City of the shop
 
-    shop_articles = db.relationship("ShopArticle", back_populates="shop") # Articles of the shop
-    orders = relationship("Order", back_populates="shop")                                # Orders of the shop
-    users = relationship("User", back_populates="shop")                                  # Users of the shop
+    # Relationships
+    shop_articles = db.relationship("ShopArticle", back_populates="shop")       # Articles of the shop
+    orders = relationship("Order", back_populates="shop")                       # Orders of the shop
+    users = relationship("User", back_populates="shop")                         # Users of the shop
 
     def __init__(self, name: str, city: str):
         """
@@ -47,26 +57,26 @@ class Shop(db.Model):
     
     def to_dict(self) -> dict:
         """
+        Get the dictionary representation of the shop with hashed id
+        
+        Returns:
+            dict: The dictionary representation of the shop
+        """
+        return {
+            "id_shop": hash_id(self.id),
+            "name": self.name,
+            "city": self.city
+        }
+    
+    def to_dict_raw(self) -> dict:
+        """
         Get the dictionary representation of the shop
         
         Returns:
             dict: The dictionary representation of the shop
         """
         return {
-            "id": hash_id(self.id),
-            "name": self.name,
-            "city": self.city
-        }
-    
-    def to_dict_debug(self) -> dict:
-        """
-        Get the dictionary representation of the shop for debugging
-        
-        Returns:
-            dict: The dictionary representation of the shop for debugging
-        """
-        return {
-            "id": self.id,
+            "id_shop": self.id,
             "name": self.name,
             "city": self.city
         }

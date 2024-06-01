@@ -1,14 +1,23 @@
-from flask import Blueprint, redirect, request, jsonify
+# file: user.py
+# Description: User API routes
+# Author: Damien Loup
+
+# Import modules
+from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
+
+# Import routes init variables
 from . import STATIC_FOLDER
+
+# Import models
 from ..database.models import Order, Article, ShopArticle, Shop, User
-from .. import db, FRONTEND_URL
 
 # Create the users blueprint
 user = Blueprint("user", __name__, static_folder=STATIC_FOLDER, static_url_path='/')
 
-@user.route("/user/<int:user_id>")
-def get_user_by_id(user_id: int):
+@user.route("/user/<int:user_id>", methods=["GET"])
+@login_required
+def get_user_by_id(user_id: str):
     """
     Get a user by id
     """
@@ -17,43 +26,23 @@ def get_user_by_id(user_id: int):
 
     # Check if user exists
     if not user:
-        return jsonify({"message": "User not found"}), 404
+        return jsonify({"message": "User not found"})
     
-    return jsonify(user.to_dict()), 200
+    # Return the user
+    return jsonify({"user" : user.to_dict_raw()}), 200
 
-@user.route("/user/<int:user_id>/shops")
-def get_shops_by_user_id(user_id: int):
+@user.route("/user/<int:user_id>/shop", methods=["GET"])
+@login_required
+def get_user_shop(user_id: str):
     """
-    Get all the shops of a user by id
+    Get a user's shop
     """
     # Get the user
     user: User = User.query.get(user_id)
 
     # Check if user exists
     if not user:
-        return jsonify({"message": "User not found"}), 404
+        return jsonify({"message": "User not found"})
     
-    # Get the shops of the user or all the shops if the user is a boss
-    shops: list[Shop] = None
-    if user.isBoss:
-        shops = Shop.query.all()
-    else:
-        shops: list[Shop] = user.shops
-
-    # Return the shops
-    return jsonify([shop.to_dict() for shop in shops]), 200
-
-@user.route("/user")
-def get_user():
-    """
-    Get all users
-    """
-    # Get connected user
-
-    print("utilisateur sur route /user : ", current_user)
-
-    if current_user.is_authenticated:
-        print("connected user")
-    return jsonify(current_user.name)
-
-    return jsonify([user.to_dict() for user in User.query.all()]), 200
+    # Return the shop of the user
+    return jsonify({"shop": user.shop.to_dict_raw()}), 200

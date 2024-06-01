@@ -1,7 +1,15 @@
+# file: Article.py
+# Description: Article model
+# Author: Damien Loup
+
+# Import modules
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 
+# Import globals
 from ...utils.globals import hash_id
+
+# Import main
 from ... import db
 
 class Article(db.Model):
@@ -14,15 +22,17 @@ class Article(db.Model):
     # Create a table in the db
     __tablename__ = 'article'
 
-    id = Column(Integer, primary_key=True)                              # ID of the article
-    description = Column(String(255), unique=True, index=True)          # Description of the article
-    brand = Column(String(255))                                         # Brand of the article
-    collection = Column(String(255))                                    # Collection of the article
-    size = Column(String(255))                                          # Size of the article
-    color = Column(String(255))                                         # Color of the article
+    # Columns
+    id = Column(Integer, primary_key=True)                                          # ID of the article
+    description = Column(String(255), index=True)                                   # Description of the article
+    brand = Column(String(255))                                                     # Brand of the article
+    collection = Column(String(255))                                                # Collection of the article
+    size = Column(String(255))                                                      # Size of the article
+    color = Column(String(255))                                                     # Color of the article
 
-    shop_articles = db.relationship("ShopArticle", back_populates="article") # Shops of the article
-    orders = relationship("Order", back_populates="article")                          # Orders of the article
+    # Relationships
+    shop_articles = db.relationship("ShopArticle", back_populates="article")        # Shops of the article
+    orders = relationship("Order", back_populates="article")                        # Orders of the article
 
     def __init__(self, description: str, brand: str, collection: str, size: str, color: str):
         """
@@ -51,17 +61,17 @@ class Article(db.Model):
         Returns:
             str: The string representation of the article
         """
-        return f"Article {self.description} of {self.brand} in {self.collection} size {self.size} color {self.color}"
+        return f"<Article - Description : {self.description}| Brand : {self.brand}| Collection : {self.collection}| Size : {self.size}| color : {self.color}>"
     
     def to_dict(self) -> dict:
         """
-        Get the dictionary representation of the article
+        Get the dictionary representation of the article with a hashed id
         
         Returns:
             dict: The dictionary representation of the article
         """
         return {
-            "id": hash_id(self.id),
+            "id_article": hash_id(self.id),
             "description": self.description,
             "brand": self.brand,
             "collection": self.collection,
@@ -69,15 +79,15 @@ class Article(db.Model):
             "color": self.color
         }
     
-    def to_dict_debug(self) -> dict:
+    def to_dict_raw(self) -> dict:
         """
-        Get the dictionary representation of the article for debugging
+        Get the dictionary representation of the article
         
         Returns:
             dict: The dictionary representation of the article
         """
         return {
-            "id": self.id,
+            "id_article": self.id,
             "description": self.description,
             "brand": self.brand,
             "collection": self.collection,

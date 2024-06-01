@@ -1,8 +1,20 @@
-from flask import Blueprint, redirect, request, jsonify
+# file: main.py
+# Description: Main routes of the server
+# Author: Damien Loup
+
+# Import modules
+from flask import Blueprint, redirect, jsonify
+
+# Import routes init variables
 from . import STATIC_FOLDER
+
+# Import models
 from ..database.models import Order, Article, ShopArticle, Shop, User
 
+# Import globals
 from ..utils.globals import hash_id
+
+# Import mains
 from .. import db, FRONTEND_URL
 
 # Create the main blueprint
@@ -15,7 +27,7 @@ def not_found(e):
     """
     return get_frontend()
 
-@main.route("/")
+@main.route("/", methods=["GET"])
 def index():
     """
     Index route of the server
@@ -33,6 +45,8 @@ def get_frontend():
     # Check if the frontend url is set otherwise display the static html
     if FRONTEND_URL:
         return redirect(FRONTEND_URL)
+    
+    # Display the static html
     return main.send_static_file("index.html")
 
 
@@ -70,22 +84,22 @@ def users():
     print(users)
     return jsonify({"users": [user.name for user in users], "shops": [user.shop.name for user in users]})
 
-@main.route('/shops')
-def shops():
-    shop: list[Shop] = Shop.query.filter_by(name="shop2").first()
-    return jsonify({"shop": shop.name, "users": [user.name for user in shop.users]})
-    #return jsonify({"shops": [shop.name for shop in shops], "users": [[user.name for user in shop.users] for shop in shops]})
+# @main.route('/shops')
+# def shops():
+#     shop: list[Shop] = Shop.query.filter_by(name="shop2").first()
+#     return jsonify({"shop": shop.name, "users": [user.name for user in shop.users]})
+#     #return jsonify({"shops": [shop.name for shop in shops], "users": [[user.name for user in shop.users] for shop in shops]})
 
 
 @main.route('/testsMtM')
 def testsMtM():
-    shop = Shop(name="shop201", city="city201")
-    db.session.add(shop)
+    # shop = Shop(name="shop201", city="city201")
+    # db.session.add(shop)
 
     article = Article(description="article202", brand="brand202", collection="collection202", size="size202", color="color202")
     db.session.add(article)
 
-    #shop = Shop.query.filter_by(name="shop201").first()
+    shop: Shop = Shop.query.filter_by(name="shop3").first()
     # shop.articles.append(article)
     # db.session.commit()
 
@@ -172,7 +186,94 @@ def testsMtM2():
 
     # return jsonify({"shop_article": shop_article_result, "shops": shops_result, "articles": articles_result})
 
-@main.route('/testsMtM3')
-def testsMtM3():
-    shop = Shop.query.filter_by(id=2).first()
+@main.route('/addShop')
+def addShop():
+    shop = Shop(name="Super shop", city="Lausanne")
+    db.session.add(shop)
+    db.session.commit()
     return jsonify({"shop": shop.name})
+
+@main.route('/addArticleToShop')
+def addArticleToShop():
+    shop: Shop = Shop.query.filter_by(id=2).first()
+    
+    article = Article(description="Montre en or", brand="Rolex", collection="Witner", size="31mm", color="Gold")
+    db.session.add(article)
+    db.session.commit()
+
+    shop_article = ShopArticle(fk_shop=shop.id, fk_article=article.id, unitsStored=133, unitsSolded=232)
+    db.session.add(shop_article)
+    db.session.commit()
+    return jsonify({"shop": shop.name, "article": article.description})
+
+@main.route('/addOrders')
+def addOrders():
+    shop: Shop = Shop.query.filter_by(id=1).first()
+    user: User = User.query.filter_by(id=2).first()
+    article: Article = Article.query.filter_by(id=4).first()
+
+    order = Order(user_id=user.id, article_id=article.id, shop_id=shop.id, units=53, status="Not approved")
+    db.session.add(order)
+    db.session.commit()
+
+    return jsonify({"shop": shop.name, "user": user.name, "order": order.id})
+
+@main.route('/addUser')
+def addUser():
+    shop: Shop = Shop.query.filter_by(id=2).first()
+    user = User(name='Jean', email="jean@gmail.com", password="jean1234", isBoss=True)
+    user.shop = shop
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({"shop": shop.name, "user": user.name})
+
+@main.route('/modifyOrder')
+def modifyOrder():
+    order: Order = Order.query.filter_by(id=4).first()
+    order.status = "Pending"
+    db.session.commit()
+    return jsonify({"order": order.id, "status": order.status})
+
+# users
+# Louis Turner - louis.t@gmail.com - Louis1234 - no shop - boss
+# Alice Smith - alice.s@gmail.com - Alice1234 - no shop - boss
+# François Lambert - françois.l@gmail.com - F-L1234 - Horology Haven - no boss
+# Steve Davis - steve.d@gmail.com - S-D1234 - Horology Haven - no boss
+# Sabrina King - sabrina.k@gmail.com - S-K1234 - O'Clock - no boss
+
+# shops
+# Horology Haven - Lausanne
+# O'Clock - Geneva
+
+@main.route('/createDatas')
+def createDatas():
+    # Create shops
+    shops = [
+        {"name": "Horology Haven", "city": "Lausanne"},
+        {"name": "O'Clock", "city": "Geneva"}
+    ]
+
+    for shop_data in shops:
+        shop = Shop(name=shop_data["name"], city=shop_data["city"])
+        db.session.add(shop)
+        db.session.commit()
+
+    # Create users
+    users = [
+        {"name": "Louis Turner", "email": "louis.t@gmail.com", "password": "Louis1234", "shop": False, "boss": True},
+        {"name": "Alice Smith", "email": "alice.s@gmail.com", "password": "Alice1234", "shop": False, "boss": True},
+        {"name": "François Lambert", "email": "françois.l@gmail.com", "password": "F-L1234", "shop": "Horology Haven", "boss": False},
+        {"name": "Steve Davis", "email": "steve.d@gmail.com", "password": "S-D1234", "shop": "Horology Haven", "boss": False},
+        {"name": "Sabrina King", "email": "sabrina.k@gmail.com", "password": "S-K1234", "shop": "O'Clock", "boss": False}
+    ]
+    
+    for user_data in users:
+        user = User(name=user_data["name"], email=user_data["email"], password=user_data["password"], isBoss=user_data["boss"])
+        if user_data["shop"]:
+            shop: Shop = Shop.query.filter_by(name=user_data["shop"]).first()
+            user.shop = shop
+        db.session.add(user)
+        db.session.commit()
+
+    return jsonify({"shops": [shop.name for shop in Shop.query.all()], "users": [user.name for user in User.query.all()]})

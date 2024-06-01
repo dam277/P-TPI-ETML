@@ -1,7 +1,14 @@
+# file: MAIN.__init__.py
+# Description: Main file to create the Flask app
+# Author: Damien Loup
+
+# Import modules
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
+
+# Import configs
 from .Configs import Configs
 
 # Init sqlalchemy and login manager
@@ -34,12 +41,16 @@ def create_app():
     from .routes.auth import auth as auth_blueprint
     from .routes.shop import shop as shops_blueprint
     from .routes.user import user as users_blueprint
+    from .routes.article import article as articles_blueprint
+    from .routes.order import order as orders_blueprint
 
     # Register the blueprints
     app.register_blueprint(main_blueprint)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(shops_blueprint)
     app.register_blueprint(users_blueprint)
+    app.register_blueprint(articles_blueprint)
+    app.register_blueprint(orders_blueprint)
     
     # Set the CORS policy if FRONTEND_URL is set
     if FRONTEND_URL:
