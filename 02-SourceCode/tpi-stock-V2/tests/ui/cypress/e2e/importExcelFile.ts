@@ -14,7 +14,7 @@ import * as enums from "../support/enums";
 import IUser from "cypress/support/interfaces/IUser";
 import IShop from "cypress/support/interfaces/IShop";
 
-describe(("Login multiple users and check for his rights are correct"), () =>
+describe(("Login to a manager and import stock and orders that will be accepted and refused by the boss, then verify the data"), () =>
 {
     let users: IUser[], shops: IShop[];     // All datas of the json file
     let user: IUser, shop: IShop            // User that we will be used
