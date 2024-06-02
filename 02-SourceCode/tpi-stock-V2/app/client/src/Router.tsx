@@ -33,17 +33,15 @@ function Router()
     return (
         <BrowserRouter>
             <UserContext>
-                {/* <Main> */}
-                    <Routes>
-                        <Route path="/" element={<Login />} />
-                        <Route path="/home" element={<Home />} />
-                        <Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/orders" element={<Orders />} />
-                        <Route path='*'element={<E404 />} />
-                        <Route path='/401' element={<E401 />} />
-                        <Route path='/403' element={<E403 />} />
-                    </Routes>
-                {/* </Main> */}
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path='*'element={<E404 />} />
+                    <Route path='/401' element={<E401 />} />
+                    <Route path='/403' element={<E403 />} />
+                </Routes>
             </UserContext>
             <Footer />
         </BrowserRouter>

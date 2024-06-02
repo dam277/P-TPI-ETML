@@ -34,18 +34,30 @@ function Sidebar()
             <nav className="font-bold flex-1">
                 <ul className="relative h-full">
                     <li>
-                        <NavLink className={({ isActive }) => `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/home"}><span>Home</span></NavLink>
+                        <NavLink className={({ isActive }) => 
+                            `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/home"}>
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink className={({ isActive }) => `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/dashboard"}>Dashboard</NavLink>
+                        <NavLink className={({ isActive }) => 
+                            `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/dashboard"}>
+                            Dashboard
+                        </NavLink>
                     </li>
                     {actualUser && actualUser.isBoss &&
                         <li>
-                            <NavLink className={({ isActive }) => `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/orders"}>Orders</NavLink>
+                            <NavLink className={({ isActive }) => 
+                                `${isActive ? "bg-colorpalette-active" : ""} py-4 pl-2 block`} to={"/orders"}>
+                                Orders
+                            </NavLink>
                         </li>
                     }
                     <li className="absolute inset-x-0 bottom-0">
-                        <button id="btnLogout" onClick={() => logout()} className="w-full h-full text-left py-4 pl-2 bg-colorpalette-button-disconnect hover:bg-opacity-80">Logout</button>
+                        <button id="btnLogout" onClick={() => logout()} 
+                            className="w-full h-full text-left py-4 pl-2 bg-colorpalette-button-disconnect hover:bg-opacity-80">
+                                Logout
+                        </button>
                     </li>
                 </ul>
             </nav>
