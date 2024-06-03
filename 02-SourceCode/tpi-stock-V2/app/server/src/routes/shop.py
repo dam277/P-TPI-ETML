@@ -129,7 +129,6 @@ def import_stock():
     shop: Shop = user.shop
     if not shop:
         return jsonify({"error": "No shop found"})
-    print(shop.name)
     
     # Read the excel file with pandas
     xl_file = pandas.ExcelFile(file)
@@ -139,11 +138,11 @@ def import_stock():
     # region ADD THE ARTICLES AND ORDERS TO THE DATABASE -------------------------------------------------------------------
     # Get the rows of the file
     for index, raw_row in data.iterrows():
-        from colorama import Fore; print(Fore.RED + str(raw_row.to_dict())); print(Fore.RESET); print(Fore.GREEN, "---")
+        # Convert the row to a dictionary
         row = raw_row.to_dict()
     
         # Get the article if it exists
-        article = Article.query.filter_by(description=row.get("Description"), brand=row.get("Brand"), collection=row.get("Collection"), size=row.get("Size"), color=row.get("Color")).first()
+        article = Article.query.filter_by(description=row.get("Description"), brand=row.get("Brand"), collection=row.get("Collection"), size=row.get("Size"),color=row.get("Color")).first()
         if not article:
             # Set the article as a new article 
             article = Article(description=row.get("Description"), brand=row.get("Brand"), collection=row.get("Collection"), size=row.get("Size"), color=row.get("Color"))
@@ -168,8 +167,4 @@ def import_stock():
             db.session.add(order)
             db.session.commit()
     # endregion ------------------------------------------------------------------------------------------------------------
-
-
-    
-    
     return jsonify({"message": "File imported"}), 200
