@@ -61,14 +61,20 @@ function Orders()
             <Sidebar />
             <div className="w-full p-16">
                 <div className="flex">
-                    <h1 className="text-4xl flex-1">{ shopData?.shop ? shopData.shop.name : "All shops"}</h1>
+                    <h1 className="text-4xl flex-1">
+                        { shopData?.shop ? 
+                            shopData.shop.name : "All shops"}
+                        </h1>
                 </div>
                 <article>
                     <div className="p-5"></div>
                     {articleData?.articles && orderData?.orders &&
-                        <InventorySummary articles={articleData.articles} orders={orderData.orders} />
+                        <InventorySummary articles={articleData.articles} 
+                                          orders={orderData.orders} />
                     }
-                    {shopData?.shops && shopData.shops.map((shop) => <Shop shop={shop} apiEndpoint={"orders"} />)}
+                    {shopData?.shops && shopData.shops.map((shop) => 
+                        <Shop shop={shop} apiEndpoint={"orders"} />
+                    )}
                 </article>
             </div>
         </Main>

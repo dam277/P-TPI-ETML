@@ -27,7 +27,7 @@ export const useFetch = <DataType> (): [ makeApiCall: <T extends DataType>(url: 
     const location = useLocation();                                     // Get the current location
 
     /**
-     * 
+     * Function to fetch data from the API
      * @param url URL to fetch data from
      * @param method Method to use for fetching data
      * @param body Body to send with the request
@@ -96,3 +96,6 @@ export const useFetch = <DataType> (): [ makeApiCall: <T extends DataType>(url: 
     // Return the data, loading state and error
     return [ makeApiCall, data, loading, error, setData ];
 }
+
+
+

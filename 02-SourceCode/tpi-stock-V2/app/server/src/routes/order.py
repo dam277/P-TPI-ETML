@@ -40,6 +40,7 @@ def update_order(order_id: int):
     """
     Modify an order
     """
+    # Check if the user is an admin
     user: User = current_user
     if not user.isBoss:
         return jsonify({"error" : "You are not an admin"}), 401
@@ -49,7 +50,6 @@ def update_order(order_id: int):
 
     # Get the order
     order: Order = Order.query.filter_by(id=order_id).first()
-    print(order)
     if order is None:
         return jsonify({"error" : "Order not found"})
 
@@ -64,5 +64,6 @@ def update_order(order_id: int):
     # Commit the changes
     db.session.commit()
 
+    # Return the success message
     return jsonify({"message": "order successfully updated"}), 200
 

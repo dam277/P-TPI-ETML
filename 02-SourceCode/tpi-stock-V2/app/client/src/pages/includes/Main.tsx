@@ -19,7 +19,8 @@ function Main({ children }: {children: any}): JSX.Element
 
     // Return the main component
     return (
-        <main className={`bg-colorpalette-backgrounds-primary text-colorpalette-texts-default min-h-screen ${location.pathname !== "/" && "flex"}`}>
+        <main className={`bg-colorpalette-backgrounds-primary text-colorpalette-texts-default 
+            min-h-screen  ${location.pathname !== "/" && "flex"}`}>
             {children}
         </main>
     );
